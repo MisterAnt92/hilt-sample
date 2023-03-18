@@ -1,0 +1,75 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    compileSdk rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+
+        applicationId rootProject.appName
+        minSdk rootProject.minSdkVersion
+        targetSdk rootProject.targetSdkVersion
+
+        versionName rootProject.versionName
+        versionCode rootProject.versionCode
+
+        testInstrumentationRunner "com.sformica.hilt_app_test.hilt.CustomTestRunner"
+    }
+
+    buildTypes {
+
+        debug {
+            minifyEnabled rootProject.ext.enableDexGuardPlugin
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            minifyEnabled rootProject.ext.enableDexGuardPlugin
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility rootProject.ext.javaVersion
+        targetCompatibility rootProject.ext.javaVersion
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.kotlinx_coroutines_core"
+
+    implementation "com.google.android.material:material:$rootProject.google_material"
+    implementation "androidx.core:core-ktx:$rootProject.androidx_core_ktx"
+    implementation "androidx.appcompat:appcompat:$rootProject.androidx_appcompat"
+    implementation "androidx.work:work-runtime-ktx:$rootProject.androidx_work_runtime"
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.androidx_constraintlayout"
+    implementation "androidx.fragment:fragment-ktx:$rootProject.androidx_fragment_ktx"
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.androidx_lifecycle_extensions"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$rootProject.androidx_livedata_ktx"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.androidx_livedata_ktx"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.androidx_viewmodel_ktx"
+
+    implementation "com.google.dagger:hilt-android:$rootProject.hilt_android"
+    implementation "androidx.hilt:hilt-work:$rootProject.hilt_work"
+    implementation "androidx.test:rules:$rootProject.androidx_test_rules"
+    implementation "androidx.work:work-testing:$rootProject.androidx_work_testing"
+    kapt "com.google.dagger:hilt-android-compiler:$rootProject.hilt_android"
+    kapt "androidx.hilt:hilt-compiler:$rootProject.hilt_work"
+
+    testImplementation "junit:junit:$rootProject.junit"
+    androidTestImplementation "androidx.test.ext:junit:$rootProject.androidx_test_ext_junit"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.androidx_espresso_core"
+    androidTestImplementation "androidx.arch.core:core-testing:$rootProject.androidx_core_testing"
+    androidTestImplementation "com.google.dagger:hilt-android-testing:$rootProject.hilt_android"
+    kaptAndroidTest "com.google.dagger:hilt-android-compiler:$rootProject.hilt_android"
+}
